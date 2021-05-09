@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - CamCol
+  - WindPlayer
+  - Camera2D
+  - Camera3D
+  - ResetColl
+  - RobotPlayer
+  - Hinder
+  - DeathArea
+  - Birth
+  - Sokoban
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Floor
+  - Wall
+  - Mechanism
+  - Model
+  - Player
+  - Post
+  - Ani
+  - AniMask
+  - Light
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Model
+    uniqueID: 2361972193
+    locked: 0
+  - name: Player
+    uniqueID: 3656968935
+    locked: 0
