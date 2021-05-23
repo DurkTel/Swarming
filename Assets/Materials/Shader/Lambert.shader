@@ -7,6 +7,7 @@
         _lightMapping_Offset  ("lightMapping_Offset" , range(0,1)) = 0
         _NormalMap            ("Norma Map"           , 2D)         = "bump"  {}
         _AmbientColor         ("AmbientColor"        , color)      = (0,0,0,0)
+
     }
     SubShader
     {

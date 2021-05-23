@@ -40,7 +40,8 @@ public class MenuView : GUIView
         {
             case "StartGame":
                 UIManager.Instance.OpenView<StatusView>("Status/Status_View", UI_Layer.Bot);
-                UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) => p.tipsText = "利用WASD，SPACE，L键可以移动、跳跃和互动");
+                //UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) => p.tipsText = "利用WASD，SPACE，L键可以移动、跳跃和互动");
+                UIManager.Instance.OpenView<DialogView>("Dialog/DialogBarView", UI_Layer.Mid, (DialogView p) => { p.order = "1-1"; });
                 FindChildrenGameObject("UICamera").gameObject.SetActive(false);
                 CameraManager.Instance.m_CameraProjection.ChangeProjection = true;
                 panel.SetActive(false);

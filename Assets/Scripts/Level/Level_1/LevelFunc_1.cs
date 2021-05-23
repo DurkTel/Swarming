@@ -47,6 +47,7 @@ namespace Swarming
             EventCenter.Instance.AddEventListener(EventDefine.ENTER_PLATFORM, EnterOrExitPlat);
             EventCenter.Instance.AddEventListener(EventDefine.DIALOG, OpenDialog);
             EventCenter.Instance.AddEventListener(EventDefine.FIRE_TIPS, FireTips);
+            EventCenter.Instance.AddEventListener(EventDefine.MOVE_TIPS, MoveTips);
         }
 
         void RemoveEvenet()
@@ -100,6 +101,11 @@ namespace Swarming
                 tengman.SetActive(false);
                 MusicManager.Instance.PlaySound("stoveFall", false, 0.5f);
             }));
+        }
+
+        void MoveTips(object obj)
+        { 
+            UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) => p.tipsText = "利用WASD，SPACE，L键可以移动、跳跃和互动");
         }
 
         void FireTips(object obj)

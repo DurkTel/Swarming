@@ -21,25 +21,30 @@ public class DialogView : GUIView
     private TextAsset m_textAsset;
     private Transform m_BG;
     public UnityAction callBack;
+    private Image m_charact_1;
+    private Image m_charact_2;
 
 
     public override void Enable()
     {
         m_BG = FindChildrenGameObject("BG");
-        CharactorManager.Instance.SetAllCharMotor(false);
+        m_charact_1 = GetControl<Image>("charact1");
+        m_charact_2 = GetControl<Image>("charact2");
+        //CharactorManager.Instance.SetAllCharMotor(false);
         m_textAsset = Resources.Load("UI/Dialog/Copywriting") as TextAsset;
         m_text = GetControl<Text>("XText");
         GetDataFromAsset();
-        Tweener bger = m_BG.DOScaleX(1f,1f);
-        bger.onComplete = () => StartChat(order);
-        EventCenter.Instance.AddEventListener(EventDefine.INTERACTION_KEY, Chat);
+        //Tweener bger = m_BG.DOScaleX(1f,1f);
+        //bger.onComplete = () => StartChat(order);
+        StartChat(order);
+        //EventCenter.Instance.AddEventListener(EventDefine.INTERACTION_KEY, Chat);
         //UIManager.AddCustomEventListener(m_text, EventTriggerType.PointerClick, Chat);
     }
 
     public override void Disable()
     {
-        CharactorManager.Instance.ReSetCharMotor();
-        EventCenter.Instance.RemoveEventListener(EventDefine.INTERACTION_KEY, Chat);
+        //CharactorManager.Instance.ReSetCharMotor();
+        //EventCenter.Instance.RemoveEventListener(EventDefine.INTERACTION_KEY, Chat);
     }
 
     private void Chat()
@@ -49,7 +54,8 @@ public class DialogView : GUIView
             if (textIndex <= chatDic[order].Count - 1 && isFinish)
                 MonoManager.Instance.StartCoroutine(ChatDely(chatDic[order][textIndex++], 0.1f));
             else if (isFinish)
-                EndChat();
+                Invoke("EndChat", 2f);
+                //EndChat();
         }
     }
 
@@ -58,12 +64,16 @@ public class DialogView : GUIView
     {
         m_text.text = "";
         isFinish = false;
-        for (int i = 0; i < list.Length; i++)
+        string[] charact = list.Split('_');
+        m_charact_1.gameObject.SetActive(charact[0] == "1");
+        m_charact_2.gameObject.SetActive(charact[0] == "2");
+        for (int i = 0; i < charact[1].Length; i++)
         {
-            m_text.text += list[i];
+            m_text.text += charact[1][i];
             yield return new WaitForSeconds(dely);
         }
         isFinish = true;
+        Chat();
     }
 
     //开始对话
