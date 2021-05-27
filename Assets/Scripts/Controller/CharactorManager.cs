@@ -56,7 +56,13 @@ namespace Swarming.Controller
             UIManager.Instance.OpenView("Dialog/DialogBarView", UI_Layer.Mid, (DialogView p) => { p.order = "0-1"; p.callBack = GetCharAble; });
             void GetCharAble()
             {
-                UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Mid, (i) => { i.tipsText = "在机器人附近按K键可以切换角色！"; });
+                UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (i) => 
+                {
+                    i.hadImg = true;
+                    i.tipsText = "在机器人附近按K键可以切换角色！";
+                    i.isSingle = false;
+                    i.imgScr = "合体";
+                });
             }
         }
 
@@ -70,7 +76,10 @@ namespace Swarming.Controller
             UIManager.Instance.OpenView("Dialog/DialogBarView", UI_Layer.Mid, (DialogView p) => { p.order = "0-3"; p.callBack = GetVisualAble; });
             void GetVisualAble()
             {
-                UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Mid, (i) => { i.tipsText = "按J键可以切换空间维度！"; });
+                UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Mid, (i) => 
+                {
+                    i.tipsText = "控制核心按J键可以切换空间维度！"; 
+                });
             }
         }
 

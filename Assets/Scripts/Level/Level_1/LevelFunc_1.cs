@@ -48,6 +48,8 @@ namespace Swarming
             EventCenter.Instance.AddEventListener(EventDefine.DIALOG, OpenDialog);
             EventCenter.Instance.AddEventListener(EventDefine.FIRE_TIPS, FireTips);
             EventCenter.Instance.AddEventListener(EventDefine.MOVE_TIPS, MoveTips);
+            EventCenter.Instance.AddEventListener(EventDefine.TRAIN_TIPS, TrainTips);
+            EventCenter.Instance.AddEventListener(EventDefine.SPACE_TIPS, SpaceTips);
         }
 
         void RemoveEvenet()
@@ -103,14 +105,48 @@ namespace Swarming
             }));
         }
 
+        void SpaceTips(object obj)
+        {
+            UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) =>
+            {
+                p.hadImg = true;
+                p.tipsText = "利用视角的切换可以有不同的维度哦";
+                p.isSingle = false;
+                p.imgScr = "空间转换";
+            });
+        }
+
+        void TrainTips(object obj)
+        {
+            UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) =>
+            {
+                p.hadImg = true;
+                p.tipsText = "利用视角的切换可以把物品砸到开关上哦";
+                p.isSingle = true;
+                p.imgScr = "压力触发";
+            });
+        }
+
         void MoveTips(object obj)
         { 
-            UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) => p.tipsText = "利用WASD，SPACE，L键可以移动、跳跃和互动");
+            UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) =>
+            {
+                p.hadImg = true;
+                p.tipsText = "利用WASD，SPACE，L键可以移动、跳跃和互动";
+                p.isSingle = true;
+                p.imgScr = "喷射气流";
+            } );
         }
 
         void FireTips(object obj)
-        { 
-            UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) => p.tipsText = "试试对着火把使用互动键！有意想不到的效果哦！");
+        {
+            UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) =>
+            {
+                p.hadImg = true;
+                p.imgScr = "燃烧触发";
+                p.isSingle = true;
+                p.tipsText = "试试对着火把使用互动键！有意想不到的效果哦！";
+            });
         }
         
         IEnumerator FujimanFire(int index,GameObject game,UnityAction callBack = null)

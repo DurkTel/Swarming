@@ -9,7 +9,7 @@ public class Tips : MonoBehaviour
     {
         if (coll.CompareTag("RobotPlayer") || coll.CompareTag("WindPlayer"))
         {
-            UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Mid, (p) => p.tipsText = "请按L键进行互动");
+            UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) => p.tipsText = "似乎是可以与某个主角进行互动的物品哦");
             if (isClose) Destroy(gameObject);
         }
     }

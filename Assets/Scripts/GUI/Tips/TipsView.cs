@@ -8,17 +8,36 @@ using DG.Tweening;
 public class TipsView : GUIView
 {
     private Text m_text;
+    private Text m_text2;
     private Transform m_bg;
+    private Image m_ImgSingle;
+    private Image m_ImgDouble;
 
-    [HideInInspector]public string tipsText;
+    [HideInInspector] public bool hadImg;
+    [HideInInspector] public string tipsText;
+    [HideInInspector] public bool isSingle;
+    [HideInInspector] public string imgScr;
 
     public override void Enable()
     {
         m_bg = FindChildrenGameObject("BG");
         m_text = GetControl<Text>("tipsText");
+        m_text2 = GetControl<Text>("tipsTextNoImg");
+        m_ImgSingle = GetControl<Image>("TipsImgSingle");
+        m_ImgDouble = GetControl<Image>("TipsImgDouble");
+
         m_text.text = tipsText;
+        m_text2.text = tipsText;
+        m_ImgSingle.sprite = ResManager.Instance.Load<Sprite>("UI/Tips/Image/" + imgScr);
+        m_ImgDouble.sprite = ResManager.Instance.Load<Sprite>("UI/Tips/Image/" + imgScr);
+
+        m_text.gameObject.SetActive(hadImg);
+        m_text2.gameObject.SetActive(!hadImg);
+        m_ImgSingle.gameObject.SetActive(hadImg && isSingle);
+        m_ImgDouble.gameObject.SetActive(hadImg && !isSingle);
+
         CharactorManager.Instance.SetAllCharMotor(false);
-        Tweener bger = m_bg.DOScale(1.5f, 0.5f);
+        Tweener bger = m_bg.DOScale(1f, 0.5f);
         bger.onComplete = () =>
         {
             EventCenter.Instance.AddEventListener(EventDefine.INTERACTION_KEY, CloseAni);

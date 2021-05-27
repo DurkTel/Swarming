@@ -88,6 +88,8 @@ public enum EventDefine
     PUMICETRAP,
     FIRE_TIPS,
     MOVE_TIPS,
+    TRAIN_TIPS,
+    SPACE_TIPS,
 
     //关卡相关-------------------2
     FLOAT_BOARD,
