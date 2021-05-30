@@ -5,13 +5,17 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Swarming;
 using Swarming.Controller;
+using Cinemachine;
 
 public class MenuView : GUIView
 {
     private GameObject panel;
     private GameObject mask2;
+    private GameObject menuCamera;
     public override void Enable()
     {
+        menuCamera = ResManager.Instance.Load<GameObject>("UI/Menu/UICamera");
+        GameObject.DontDestroyOnLoad(menuCamera);
         panel = FindChildrenGameObject("Panel").gameObject;
         mask2 = FindChildrenGameObject("Mask_2").gameObject;
         //panel.SetActive(false);
@@ -31,7 +35,7 @@ public class MenuView : GUIView
     public override void Disable()
     {
         GameManager.Instance.windMotor.isEnable = true;
-
+        GameObject.Destroy(menuCamera);
     }
 
     protected override void OnClick(string btnName)
@@ -42,7 +46,9 @@ public class MenuView : GUIView
                 UIManager.Instance.OpenView<StatusView>("Status/Status_View", UI_Layer.Bot);
                 //UIManager.Instance.OpenView<TipsView>("Tips/Tips_View", UI_Layer.Top, (p) => p.tipsText = "利用WASD，SPACE，L键可以移动、跳跃和互动");
                 UIManager.Instance.OpenView<DialogView>("Dialog/DialogBarView", UI_Layer.Mid, (DialogView p) => { p.order = "1-1"; });
-                FindChildrenGameObject("UICamera").gameObject.SetActive(false);
+                //FindChildrenGameObject("UICamera").gameObject.SetActive(false);
+                menuCamera.gameObject.SetActive(false);
+
                 CameraManager.Instance.m_CameraProjection.ChangeProjection = true;
                 panel.SetActive(false);
                 mask2.SetActive(false);
